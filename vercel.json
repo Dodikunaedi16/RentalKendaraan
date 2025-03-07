@@ -8,7 +8,13 @@
         { "src": "/build/(.*)", "dest": "/public/build/$1" },
         { "src": "/(.*)", "dest": "/api/index.php" }
     ],
-    "public": true,
+    "builds": [
+        {
+            "src": "api/index.php",
+            "use": "@vercel/php"
+        }
+    ],
+    "installCommand": "curl -sS https://getcomposer.org/installer | php && mv composer.phar /usr/local/bin/composer",
     "buildCommand": "composer install --no-dev && php artisan config:cache && vite build",
     "outputDirectory": "public",
     "env": {
@@ -30,6 +36,6 @@
         "DB_PORT": "3306",
         "DB_DATABASE": "db2024_stormtorn",
         "DB_USERNAME": "db2024_stormtorn",
-        "DB_PASSWORD": "your_database_password"
+        "DB_PASSWORD": "@db_password"
     }
 }
